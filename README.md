@@ -8,3 +8,22 @@ The Block is a work in progress. Many features to still add.
 3. Large work still to be done on the P2P networking code side. Right now the program works on localhost and can run multiple nodes using different ports. When trying to connect over the internet in P2P style it is not working. Need to research packages available for Python to help with the P2P networking code.
 
 Slowly but surely adding features and learning new skills to make this project a reality.
+
+Please note that I run this on my desktop with a Virtual Environment that does not upload into GitHub. My environment runs Python 3.7 with the following packages
+
+Flask
+Flask-Cors
+Jinja2
+MarkupSafe
+Werkzeug
+certifi
+chardet
+click
+idna
+itsdangerous
+pip
+pycryptodome
+requests
+setuptools
+six
+urllib3
