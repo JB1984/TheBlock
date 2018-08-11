@@ -26,4 +26,8 @@ pycryptodome <br>
 requests <br>
 setuptools <br>
 six <br>
-urllib3
+urllib3<br>
+<br>
+
+The starting point for my code was the below repository: <br>
+https://github.com/adilmoujahid/blockchain-python-tutorial
