@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blockchain Client</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendor/DataTables/css/datatables.min.css" rel="stylesheet">
+    <link href="/static/css/custom.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Blockchain Client</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Wallet Generator
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/make/transaction">Make Transaction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/view/transactions">View Transactions
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/view/wallet_balance">View Wallet Balance</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- Blockchain Node URL Selector -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card-body">
+            <h4 class="card-title">View Wallet Address (Public Key)</h4>
+            <p class="card-text">See below for your wallet address, this is also called your public key</p>
+            <br>
+            <p id="PubKey" style="word-break: break-all; white-space: normal"></p>
+            <br>
+            <p class="card-text">See below for your wallet balance</p>
+            <p id="Balance" style="word-break: break-all; white-space: normal"></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/DataTables/js/datatables.min.js"></script>
+    <script src="/static/vendor/DataTables/js/ellipsis.js"></script>
+
+
+    <script>
+
+      $(document).ready(function(){
+        var pubKey = "";
+        $.ajax({
+                url: "/get_pub_key",
+                type: 'GET',
+                success: function(data){
+                    pubKey = data.pub_key;
+                    $("#PubKey").append(pubKey);
+               },
+               async: false //Not ideal since blocks run until request complete, need to think of new way soon
+        });
+        $.ajax({
+            url: "http://127.0.0.1:5000/chain",
+            type: 'GET',
+            success: function(response){
+              console.log(response);
+              console.log(pubKey);
+              //Generate Transactions Table
+              var transactions = [];
+              var balance = 0;
+              count = 1;
+              for (i = 1; i < response.length; i++) {
+                for (j = 0; j < response["chain"][i]["transactions"].length; j++) {
+                  //format date
+                  var options = {  year: "numeric", month: "short",  day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit"  };
+                  var date = new Date(response["chain"][i]["timestamp"] * 1000);
+                  var formattedDateTime = date.toLocaleTimeString("en-us", options);
+                  transaction = [count,
+                                response["chain"][i]["transactions"][j]["recipient_address"],
+                                response["chain"][i]["transactions"][j]["sender_address"],
+                                response["chain"][i]["transactions"][j]["value"],
+                                formattedDateTime,
+                                response["chain"][i]["block_number"]];
+                  if (response["chain"][i]["transactions"][j]["recipient_address"] == pubKey){
+                        transactions.push(transaction);
+                        count += 1;
+                        var transaction_amt = parseInt(transaction[3],10);
+                        balance += transaction_amt;
+                        $("#Balance").empty();
+                        $("#Balance").append(balance);
+                        }
+                };
+              };
+               // Restrict a column to 10 characters, do split words
+                $('#transactions_table').dataTable( {
+                  data: transactions,
+                  columns: [{ title: "#" },
+                            { title: "Recipient Address"},
+                            { title: "Sender Address"},
+                            { title: "Value"},
+                            { title: "Timestamp"},
+                            { title: "Block"}],
+                  columnDefs: [ {targets: [1,2,3,4,5], render: $.fn.dataTable.render.ellipsis( 25 )}]
+                } );
+            },
+            error: function(error){
+              console.log(error);
+            }
+          });
+      })
+    </script>
+
+
+
+  </body>
+
+</html>
