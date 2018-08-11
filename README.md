@@ -11,7 +11,7 @@ Slowly but surely adding features and learning new skills to make this project a
 
 Please note that I run this on my desktop with a Virtual Environment that does not upload into GitHub. My environment runs Python 3.7 with the following packages
 
-Flask
+Flask <b>
 Flask-Cors
 Jinja2
 MarkupSafe
