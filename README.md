@@ -12,18 +12,18 @@ Slowly but surely adding features and learning new skills to make this project a
 Please note that I run this on my desktop with a Virtual Environment that does not upload into GitHub. My environment runs Python 3.7 with the following packages
 
 Flask <br>
-Flask-Cors
-Jinja2
-MarkupSafe
-Werkzeug
-certifi
-chardet
-click
-idna
-itsdangerous
-pip
-pycryptodome
-requests
-setuptools
-six
+Flask-Cors <br>
+Jinja2 <br>
+MarkupSafe <br>
+Werkzeug <br>
+certifi <br>
+chardet <br>
+click <br>
+idna <br>
+itsdangerous <br>
+pip <br>
+pycryptodome <br>
+requests <br>
+setuptools <br>
+six <br>
 urllib3
