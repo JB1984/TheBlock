@@ -1,6 +1,15 @@
 # TheBlock
 The Block is a work in progress. Many features to still add.
 
+To use this just clone the repo and use a CLI:
+
+"python blockchain.py -p 5000"
+
+"python blockchain_client.py -p 8080"
+
+navigate to the approriate localhost addresses in your browser and have some fun. First create a wallet and then mess around with sending transactions. You will need to have the python packages listed at the end of this document to run the program.
+
+
 1. Currently have the ability to send "value" and "notes" in blockchain transaction. Need to add a new GUI page to display "notes". This would be the posts that people make.
 
 2. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions.
