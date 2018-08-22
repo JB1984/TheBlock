@@ -9,12 +9,13 @@ To use this just clone the repo and use a CLI:
 
 navigate to the approriate localhost addresses in your browser and have some fun. First create a wallet and then mess around with sending transactions. You will need to have the python packages listed at the end of this document to run the program.
 
+1. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions.
 
-1. Currently have the ability to send "value" and "notes" in blockchain transaction. Need to add a new GUI page to display "notes". This would be the posts that people make.
+2.Explore the use of IPFS so storing and displaying images in posts.
 
-2. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions.
+3.Idea would be to use "value" as a reward for running the network (mining) and this "value" would need to be purchased by advertisers to run ads. This would create a decentralized sharing network where the money and value created is spread to the contributors. Perhaps a "like" would give additional "value".
 
-3. Large work still to be done on the P2P networking code side. Right now the program works on localhost and can run multiple nodes using different ports. When trying to connect over the internet in P2P style it is not working. Need to research packages available for Python to help with the P2P networking code.
+4. Large work still to be done on the P2P networking code side. Right now the program works on localhost and can run multiple nodes using different ports. When trying to connect over the internet in P2P style it is not working. Need to research packages available for Python to help with the P2P networking code.
 
 Slowly but surely adding features and learning new skills to make this project a reality.
 
