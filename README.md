@@ -13,6 +13,8 @@ To use first create a wallet and then mess around with sending transactions. Use
 
 You will need to have the python packages listed at the end of this document to run the program.
 
+<h3> TO DO: </h3>
+
 1. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions.
 
 2.Explore the use of IPFS for storing and displaying images in posts.
