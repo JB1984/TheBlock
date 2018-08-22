@@ -13,6 +13,8 @@ To use first create a wallet and then mess around with sending transactions. Use
 
 You will need to have the python packages listed at the end of this document to run the program.
 
+<hr>
+
 <h3> TO DO: </h3>
 
 1. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions.
@@ -24,6 +26,8 @@ You will need to have the python packages listed at the end of this document to 
 4. Large work still to be done on the P2P networking code side. Right now the program works on localhost and can run multiple nodes using different ports. When trying to connect over the internet in P2P style it is not working. Need to research packages available for Python to help with the P2P networking code.
 
 Slowly but surely adding features and learning new skills to make this project a reality.
+
+<hr>
 
 Please note that I run this on my desktop with a Virtual Environment that does not upload into GitHub. My environment runs Python 3.7 with the following packages
 
