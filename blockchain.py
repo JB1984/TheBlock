@@ -136,7 +136,7 @@ class Blockchain:
             #Delete the reward transaction
             transactions = block['transactions'][:-1]
             #Need to make sure that the dictionary is ordered, otherwise we'll get a different hash
-            transaction_elements = ['sender_address', 'recipient_address', 'value']
+            transaction_elements = ['sender_address', 'recipient_address', 'value', 'note']
             transactions = [OrderedDict((k, transaction[k]) for k in transaction_elements) for transaction in transactions]
 
             if not self.valid_proof(transactions, block['previous_hash'], block['nonce'], MINING_DIFFICULTY):
