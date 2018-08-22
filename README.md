@@ -11,7 +11,7 @@ navigate to the approriate localhost addresses in your browser and have some fun
 
 1. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions.
 
-2.Explore the use of IPFS so storing and displaying images in posts.
+2.Explore the use of IPFS for storing and displaying images in posts.
 
 3.Idea would be to use "value" as a reward for running the network (mining) and this "value" would need to be purchased by advertisers to run ads. This would create a decentralized sharing network where the money and value created is spread to the contributors. Perhaps a "like" would give additional "value".
 
