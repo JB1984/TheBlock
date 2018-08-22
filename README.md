@@ -1,5 +1,5 @@
 # TheBlock
-The Block is a work in progress. Many features to still add.
+The Block is an attempt to create a decentralized twitter like social media platform, written in Python using Flask. The Block is a work in progress. Many features to still add.
 
 To use this just clone the repo and use a CLI:
 
