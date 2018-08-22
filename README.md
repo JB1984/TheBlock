@@ -7,7 +7,11 @@ To use this just clone the repo and use a CLI:
 
 "python blockchain_client.py -p 8080"
 
-navigate to the approriate localhost addresses in your browser and have some fun. First create a wallet and then mess around with sending transactions. Use different ports on your computer to simulate multiple nodes on the network. You will need to have the python packages listed at the end of this document to run the program.
+navigate to the approriate localhost addresses in your browser and have some fun. 
+
+To use first create a wallet and then mess around with sending transactions. Use different ports on your computer to simulate multiple nodes on the network. 
+
+You will need to have the python packages listed at the end of this document to run the program.
 
 1. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions.
 
