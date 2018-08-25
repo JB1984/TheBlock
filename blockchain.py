@@ -55,14 +55,15 @@ class Blockchain:
         h = SHA.new(str(transaction).encode('utf-8'))
         return verifier.verify(h, binascii.unhexlify(signature))
 
-    def submit_transaction(self, sender_address, recipient_address, value, note, signature):
+    def submit_transaction(self, sender_address, recipient_address, value, note, picture, signature):
 
         ### Add a transaction to transactions array if the signature is verified
         transaction = OrderedDict({
             'sender_address': sender_address,
             'recipient_address': recipient_address,
             'value': value,
-            'note': note
+            'note': note,
+            'picture': picture
         })
 
         # Reward for mining a block
@@ -136,7 +137,7 @@ class Blockchain:
             #Delete the reward transaction
             transactions = block['transactions'][:-1]
             #Need to make sure that the dictionary is ordered, otherwise we'll get a different hash
-            transaction_elements = ['sender_address', 'recipient_address', 'value', 'note']
+            transaction_elements = ['sender_address', 'recipient_address', 'value', 'note', 'picture']
             transactions = [OrderedDict((k, transaction[k]) for k in transaction_elements) for transaction in transactions]
 
             if not self.valid_proof(transactions, block['previous_hash'], block['nonce'], MINING_DIFFICULTY):
@@ -200,11 +201,11 @@ def new_transaction():
     values = request.form
 
     # Check that the required fields are in the POST'ed data
-    required = ['sender_address', 'recipient_address', 'amount', 'signature']
+    required = ['sender_address', 'recipient_address', 'signature']
     if not all(k in values for k in required):
         return 'Missing values', 400
     # Create a new transaction
-    transaction_result = blockchain.submit_transaction(values['sender_address'], values['recipient_address'], values['amount'], values['note'], values['signature'])
+    transaction_result = blockchain.submit_transaction(values['sender_address'], values['recipient_address'], values['amount'], values['note'], values['picture'], values['signature'])
 
     if transaction_result == False:
         response = {'message': 'Invalid Transaction!'}
@@ -236,7 +237,7 @@ def mine():
     nonce = blockchain.proof_of_work()
 
     # We must receive a reward for finding the proof and using out computers resources to do so
-    blockchain.submit_transaction(sender_address=MINING_SENDER, recipient_address=blockchain.node_id, value=MINING_REWARD, note="", signature="")
+    blockchain.submit_transaction(sender_address=MINING_SENDER, recipient_address=blockchain.node_id, value=MINING_REWARD, note="", picture="", signature="")
 
     # Forge the new block by adding it to the chain
     previous_hash = blockchain.hash(last_block)

@@ -1,6 +1,8 @@
 from collections import OrderedDict
 
 import binascii
+import base64
+import json
 
 import Crypto
 import Crypto.Random
@@ -14,12 +16,13 @@ from flask import Flask, jsonify, request, render_template
 
 class Transaction:
 
-    def __init__(self, sender_address, sender_private_key, recipient_address, value, note):
+    def __init__(self, sender_address, sender_private_key, recipient_address, value, note, picture):
         self.sender_address = sender_address
         self.sender_private_key = sender_private_key
         self.recipient_address = recipient_address
         self.value = value
         self.note = note
+        self.picture = picture
 
     def __getattr__(self, attr):
         return self.data[attr]
@@ -28,7 +31,8 @@ class Transaction:
         return OrderedDict({'sender_address': self.sender_address,
                             'recipient_address': self.recipient_address,
                             'value': self.value,
-                            'note': self.note})
+                            'note': self.note,
+                            'picture': self.picture})
 
     def sign_transaction(self):
 
@@ -90,8 +94,16 @@ def generate_transaction():
     recipient_address = request.form['recipient_address']
     value = request.form['amount']
     note = request.form['note']
+    if request.form['picture'] != "":
+        with open(request.form['picture'], "rb") as imageFile:
+            pictureString = base64.b64encode(imageFile.read())
+            pictureString1 = str(pictureString)
+            print(pictureString)
+            print(pictureString1)
+    else:
+        pictureString1 = ""
 
-    transaction = Transaction(sender_address, sender_private_key, recipient_address, value, note)
+    transaction = Transaction(sender_address, sender_private_key, recipient_address, value, note, pictureString1)
 
     response = {'transaction': transaction.to_dict(), 'signature': transaction.sign_transaction()}
 

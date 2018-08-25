@@ -64,6 +64,7 @@
 
 
     <script>
+
       $(function(){
 
           function create(htmlStr) {
@@ -94,6 +95,7 @@
                                 response["chain"][i]["transactions"][j]["sender_address"],
                                 response["chain"][i]["transactions"][j]["value"],
                                 response["chain"][i]["transactions"][j]["note"],
+                                response["chain"][i]["transactions"][j]["picture"],
                                 formattedDateTime,
                                 response["chain"][i]["block_number"]];
                   transactions.push(transaction);
@@ -103,7 +105,7 @@
               // Restrict a column to 10 characters, do split words
                 for (i=0; i< transactions.length; i++){
                     if (transactions[i][4] != "") {
-                        var fragment = create('<div class="card"><div class="cardContainer"><p>'+transactions[i][2]+'</p><h4><b>'+transactions[i][4]+'</b></h4></div></div><br>');
+                        var fragment = create('<div class="card"><div class="cardContainer"><p>'+transactions[i][2]+'</p><h4><b>'+transactions[i][4]+'</b></h4><img src="data:image/png;base64,'+transactions[i][5].substring(2).slice(0,-1)+'"/></div></div><br>');
                         document.getElementById("generate-here").appendChild(fragment);
                     }
                 }
