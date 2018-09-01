@@ -1,5 +1,5 @@
 # TheBlock
-TheBlock is an attempt to create a decentralized twitter like social media platform, written in Python using Flask. TheBlock is a work in progress. Many features to still add.
+TheBlock is an attempt to create a decentralized twitter like social media platform, written in Python using Flask. TheBlock is a work in progress. Many features to still add. Most recent update 0.6 done on 9/1/2018 changed a lot of code related to the look of posts and how images show in each post.
 
 To use this just clone the repo and use a CLI:
 
