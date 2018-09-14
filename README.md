@@ -19,9 +19,6 @@ You will need to have the python packages listed at the end of this document to 
 
 <hr>
 
-
-4. P2P networking for blockchain.py seem to be working, without sockets....just using flask. You MUST add port forwarding to router though for this to work. Use -p on the command line to specify the port you want to use. Transaction pools are still per each node on the network. Possibly in the future add a shared transaction pool to mine from.
-
 Slowly but surely adding features and learning new skills to make this project a reality.
 
 <hr>
