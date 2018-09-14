@@ -21,8 +21,6 @@ You will need to have the python packages listed at the end of this document to 
 
 <h3> TO DO: </h3>
 
-1. Functioning wallet and ability to send "value" to wallets. Have a wallet GUI page but need to update its code to properly take into account the sending of "value" from your wallet to another. Right now it only adds up the received transactions and does not debit the sent transactions. Must also have a check to make sure wallet has sufficient balance for any trasnfer.
-
 2.Image sharing is coming along nicely using base64. Sharing works now, but you need to put the images in the root folder and type in the name. Need to add ability to select images from anywhere on the computer and the name/path to autopopulate.
 
 3.Idea would be to use "value" as a reward for running the network (mining) and this "value" would need to be purchased by advertisers to run ads. This would create a decentralized sharing network where the money and value created is spread to the contributors. Perhaps a "like" would give additional "value".
