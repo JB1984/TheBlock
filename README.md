@@ -19,10 +19,6 @@ You will need to have the python packages listed at the end of this document to 
 
 <hr>
 
-<h3> TO DO: </h3>
-
-2.Image sharing is coming along nicely using base64. Sharing works now, but you need to put the images in the root folder and type in the name. Need to add ability to select images from anywhere on the computer and the name/path to autopopulate.
-
 3.Idea would be to use "value" as a reward for running the network (mining) and this "value" would need to be purchased by advertisers to run ads. This would create a decentralized sharing network where the money and value created is spread to the contributors. Perhaps a "like" would give additional "value".
 
 4. P2P networking for blockchain.py seem to be working, without sockets....just using flask. You MUST add port forwarding to router though for this to work. Use -p on the command line to specify the port you want to use. Transaction pools are still per each node on the network. Possibly in the future add a shared transaction pool to mine from.
