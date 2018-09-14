@@ -27,7 +27,7 @@ You will need to have the python packages listed at the end of this document to 
 
 3.Idea would be to use "value" as a reward for running the network (mining) and this "value" would need to be purchased by advertisers to run ads. This would create a decentralized sharing network where the money and value created is spread to the contributors. Perhaps a "like" would give additional "value".
 
-4. Large work still to be done on the P2P networking code side. Right now the program works on localhost and can run multiple nodes using different ports. When trying to connect over the internet in P2P style it is not working. Need to research packages available for Python to help with the P2P networking code.
+4. P2P networking for blockchain.py seem to be working, without sockets....just using flask. You MUST add port forwarding to router though for this to work. Use -p on the command line to specify the port you want to use. Transaction pools are still per each node on the network. Possibly in the future add a shared transaction pool to mine from.
 
 Slowly but surely adding features and learning new skills to make this project a reality.
 
