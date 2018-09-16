@@ -1,7 +1,7 @@
 # TheBlock
 TheBlock is an attempt to create a decentralized twitter like social media platform, written in Python using Flask. TheBlock is a work in progress. Many features to still add. 
 
-<b> Most recent update in branch Version 0.8 on 9/16/2018</b> Added automatic port forwarding using UPnP library. Right now set to port 5001
+<b> Most recent update in branch Version 0.8 on 9/16/2018</b> Added automatic port forwarding using UPnP library (pyupnp_async). Right now set to port 5001
 
 <i>Merged</i> <b>Most recent update 0.7 done on 9/14/2018</b> Changed Flask host to "0.0.0.0" to allow for outside connections.
 
