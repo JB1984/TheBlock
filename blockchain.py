@@ -18,6 +18,10 @@ import requests
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 
+from pyupnp_async import msearch_first
+import socket
+import asyncio
+
 
 MINING_SENDER = "THE BLOCKCHAIN"
 MINING_REWARD = 1
@@ -55,6 +59,29 @@ class Blockchain:
         h = SHA.new(str(transaction).encode('utf-8'))
         return verifier.verify(h, binascii.unhexlify(signature))
 
+    def verify_transaction_amount(self, sender_address, value):
+
+        #First go through chain and add up all transactions where recipeient address is sender address
+        last_block = self.chain[0]
+        current_index = 1
+        wallet_balance = 0
+
+        while current_index < len(self.chain):
+            block = self.chain[current_index]
+            transactions = block['transactions']
+            if transactions[1] == sender_address:
+                wallet_balance += int(transactions[2])
+
+            last_block = block
+            current_index += 1
+
+        if (wallet_balance == 0):
+            return True
+        elif (wallet_balance < value):
+            return False
+        else:
+            return True
+
     def submit_transaction(self, sender_address, recipient_address, value, note, picture, signature):
 
         ### Add a transaction to transactions array if the signature is verified
@@ -73,7 +100,8 @@ class Blockchain:
         # Manages transactions from wallet to another wallet
         else:
             transaction_verification = self.verify_transaction_signature(sender_address, signature, transaction)
-            if transaction_verification:
+            transaction_amt_verification = self.verify_transaction_amount(sender_address, value)
+            if transaction_verification and transaction_amt_verification:
                 self.transactions.append(transaction)
                 return len(self.chain) + 1
             else:
@@ -293,6 +321,24 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--port', default=5000, type=int, help='port to listen on')
     args = parser.parse_args()
     port = args.port
+
+    # Set up port forwarding
+    internalIP = socket.gethostbyname(socket.gethostname())
+
+
+    async def forward_port(local_ip, local_port, ext_port, protocol):
+        resp = await msearch_first('urn:schemas-upnp-org:device:InternetGatewayDevice:1')
+        device = await resp.get_device()
+        service = device.find_first_service('urn:schemas-upnp-org:service:WANIPConnection:1')
+        ext_ip = await service.get_external_ip_address()
+        try:
+            await service.add_port_mapping(local_port, ext_port, local_ip, protocol)
+            print('Data to external Port {} will be forwarded to {}:{}'.format(ext_port, local_ip, local_port))
+        except UpnpSoapError as e:
+            print(e)
+
+
+    forward_port(internalIP, 5001, 5001, 'TCP')
 
     app.run(host='0.0.0.0', port=port)
 
