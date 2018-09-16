@@ -3,7 +3,7 @@ TheBlock is an attempt to create a decentralized twitter like social media platf
 
 <b> Most recent update in branch Version 0.8 on 9/16/2018</b> Added automatic port forwarding using UPnP library. Right now set to port 5001
 
-<i>Merged</i> <b>Most recent update 0.7 done on 9/14/2018</b> Changed flash host to "0.0.0.0" to allow for outside connections.
+<i>Merged</i> <b>Most recent update 0.7 done on 9/14/2018</b> Changed Flask host to "0.0.0.0" to allow for outside connections.
 
 <i>Merged</i> <b>update 0.6 done on 9/1/2018</b> changed a lot of code related to the look of posts and how images show in each post.
 
