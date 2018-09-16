@@ -41,7 +41,7 @@
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="/view/wallet_balance">View Wallet Balance</a>
+              <a class="nav-link" href="/view/wallet_balance">My Wallet</a>
             </li>
           </ul>
         </div>
@@ -55,12 +55,12 @@
         <div class="col-lg-12">
 
           <div class="card-body">
-            <h4 class="card-title">View Wallet Address (Public Key)</h4>
-            <p class="card-text">See below for your wallet address, this is also called your public key</p>
+            <h4 class="card-title">Your Public Key</h4>
+            <p class="card-text">Below is your public key. Other people can use this address to send you tokens</p>
             <br>
             <p id="PubKey" style="word-break: break-all; white-space: normal"></p>
             <br>
-            <p class="card-text">See below for your wallet balance</p>
+            <h4 class="card-title">Your Wallet Balance</h4>
             <p id="Balance" style="word-break: break-all; white-space: normal"></p>
           </div>
 
@@ -97,6 +97,7 @@
               //Generate Transactions Table
               var transactions = [];
               var balance = 0;
+              $("#Balance").append(balance)
               count = 1;
               for (i = 1; i < response.length; i++) {
                 for (j = 0; j < response["chain"][i]["transactions"].length; j++) {
