@@ -9,7 +9,7 @@ TheBlock is an attempt to create a decentralized twitter like social media platf
 
 To use this just clone the repo and use a CLI:
 
-"python blockchain.py -p 5001"
+"python blockchain.py -p 5000"
 
 "python blockchain_client.py -p 8080"
 
