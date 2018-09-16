@@ -3,7 +3,7 @@ TheBlock is an attempt to create a decentralized twitter like social media platf
 
 <b>Most recent update 0.7 done on 9/14/2018</b> Changed flash host to "0.0.0.0" to allow for outside connections.
 
-<b>update 0.6 done on 9/1/2018</b> changed a lot of code related to the look of posts and how images show in each post.
+<i>Merged</i> <b>update 0.6 done on 9/1/2018</b> changed a lot of code related to the look of posts and how images show in each post.
 
 To use this just clone the repo and use a CLI:
 
