@@ -55,6 +55,33 @@ class Blockchain:
         h = SHA.new(str(transaction).encode('utf-8'))
         return verifier.verify(h, binascii.unhexlify(signature))
 
+
+    def verify_transaction_amount(self, sender_address, value):
+
+        ### Check that the sender has enough value in his wallet to send what he wants to
+        debitsTran = 0
+        creditsTran = 0
+        totalTran = 0
+
+        for c in self.chain:
+            transactions = c['transactions']
+            for transaction in transactions:
+                if transaction['sender_address'] == sender_address:
+                    debitsTran += int(transaction['value'])
+                elif transaction['recipient_address'] == sender_address:
+                    creditsTran += int(transaction['value'])
+
+        totalTran = debitsTran - creditsTran
+
+        # Only have the totalTran == 0 check in for testing so that we can send a test trans at start, remove in production
+        if totalTran == 0:
+            return True
+        elif totalTran >= int(value):
+            return True
+        else:
+            return False
+
+
     def submit_transaction(self, sender_address, recipient_address, value, note, picture, signature):
 
         ### Add a transaction to transactions array if the signature is verified
@@ -72,8 +99,9 @@ class Blockchain:
             return len(self.chain) + 1
         # Manages transactions from wallet to another wallet
         else:
-            transaction_verification = self.verify_transaction_signature(sender_address, signature, transaction)
-            if transaction_verification:
+            transaction_verification_sig = self.verify_transaction_signature(sender_address, signature, transaction)
+            transaction_verification_val = self.verify_transaction_amount(sender_address, value)
+            if transaction_verification_sig and transaction_verification_val:
                 self.transactions.append(transaction)
                 return len(self.chain) + 1
             else:
@@ -232,25 +260,29 @@ def full_chain():
 
 @app.route('/mine', methods=['GET'])
 def mine():
-    # We run the proof of work algorithm to get the next proof
-    last_block = blockchain.chain[-1]
-    nonce = blockchain.proof_of_work()
+    # Check and see if there are any transactions to mine, if there are not then do not mine a block
+    if blockchain.transactions:
 
-    # We must receive a reward for finding the proof and using out computers resources to do so
-    blockchain.submit_transaction(sender_address=MINING_SENDER, recipient_address=blockchain.node_id, value=MINING_REWARD, note="", picture="", signature="")
+        # We run the proof of work algorithm to get the next proof
+        last_block = blockchain.chain[-1]
+        nonce = blockchain.proof_of_work()
 
-    # Forge the new block by adding it to the chain
-    previous_hash = blockchain.hash(last_block)
-    block = blockchain.create_block(nonce, previous_hash)
+        # We must receive a reward for finding the proof and using out computers resources to do so
+        # blockchain.submit_transaction(sender_address=MINING_SENDER, recipient_address=blockchain.node_id, value=MINING_REWARD, note="", picture="", signature="")
 
-    response = {'message': 'New Block Forged!',
-                'block_number': block['block_number'],
-                'transactions': block['transactions'],
-                'nonce': block['nonce'],
-                'previous_hash': block['previous_hash']}
+        # Forge the new block by adding it to the chain
+        previous_hash = blockchain.hash(last_block)
+        block = blockchain.create_block(nonce, previous_hash)
 
-    return jsonify(response), 200
+        response = {'message': 'New Block Forged!',
+                    'block_number': block['block_number'],
+                    'transactions': block['transactions'],
+                    'nonce': block['nonce'],
+                    'previous_hash': block['previous_hash']}
 
+        return jsonify(response), 200
+    # If no transactions just return something so that there is no error in Flask
+    return 'No Transactions'
 
 @app.route('/nodes/register', methods=['POST'])
 def register_nodes():
